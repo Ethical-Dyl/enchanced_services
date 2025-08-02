@@ -59,8 +59,8 @@ enhanced_services/            # Root folder
 
 ## 🚀 Quick Links
 
-* 🔍 [Health Check Docs and Video](./HEALTH_CHECK_README.md)
-* ⚙️ [Run Health Check](./health_check.ps1)
+* 🔍 [Health Check Docs and Video](./health_check/HEALTH_CHECK_README.md)
+* ⚙️ [Run Health Check](./health_check/health_check.ps1)
 
 ## 🚀 Getting Started
 
