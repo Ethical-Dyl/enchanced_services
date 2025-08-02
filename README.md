@@ -50,8 +50,7 @@ The **Enhanced Services** repository brings together two complementary modules:
 enhanced_services/            # Root folder
 ├── health_check/             # System Health Check module
 │   ├── HealthCheck.ps1       # Main health-check script
-│   └── docs/                 # In-depth documentation
-│       └── README.md         # Script guide and customization
+│   └── README.md             # Video & Script guide and customization
 │
 ├── LICENSE                   # MIT License
 └── README.md                 # ← You are here
