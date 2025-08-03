@@ -54,7 +54,7 @@ function Get-PendingReboot {
     return $false
 }
 
-function Ensure-Module {
+function Install-Module {
     param($Name)
     if (-not (Get-Module -ListAvailable -Name $Name)) {
         Write-Host "Installing module $Name..."
@@ -86,7 +86,7 @@ function Update-Progress {
 
 #— Ensure Windows Update module
 Update-Progress "Checking for PSWindowsUpdate module"
-Ensure-Module PSWindowsUpdate
+Install-Module PSWindowsUpdate
 
 #— Prepare output paths
 Update-Progress "Preparing output file paths"
@@ -195,11 +195,11 @@ $activation = Get-CimInstance SoftwareLicensingProduct `
 Update-Progress "Gathering time sync status"
 $timeSyncRaw = (w32tm /query /status) 2>&1
 $timeSync = [PSCustomObject]@{
-  Source       = ($timeSyncRaw | Select-String 'Source:'        | % { $_.Line.Split(':',2)[1].Trim() })
-  Stratum      = ($timeSyncRaw | Select-String 'Stratum:'       | % { $_.Line.Split(':',2)[1].Trim() })
-  PollInterval = ($timeSyncRaw | Select-String 'Poll Interval:' | % { $_.Line.Split(':',2)[1].Trim() })
+  Source       = ($timeSyncRaw | Select-String 'Source:'        | ForEach-Object { $_.Line.Split(':',2)[1].Trim() })
+  Stratum      = ($timeSyncRaw | Select-String 'Stratum:'       | ForEach-Object { $_.Line.Split(':',2)[1].Trim() })
+  PollInterval = ($timeSyncRaw | Select-String 'Poll Interval:' | ForEach-Object { $_.Line.Split(':',2)[1].Trim() })
   LastSync     = ($timeSyncRaw | Select-String 'Last successful sync time:' |
-                    % { $_.Line.Split(':',2)[1].Trim() })
+                    ForEach-Object { $_.Line.Split(':',2)[1].Trim() })
 }
 
 Update-Progress "Gathering top CPU processes"
